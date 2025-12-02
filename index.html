@@ -51,6 +51,30 @@
         </div>
       </div>
 
+        <!-- Pick A Price Modal -->
+        <div class="modal fade" id="pickPriceModal" tabindex="-1" role="dialog" aria-labelledby="pickPriceModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="pickPriceModalLabel">Pick A Price</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="pickPriceForm">
+                  <div class="form-group">
+                    <label for="priceRange">Select your price:</label>
+                    <input type="range" class="form-control-range" id="priceRange" min="5" max="100" value="25" step="1">
+                    <div>Selected Price: $<span id="selectedPrice">25</span></div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
       <div class="column">
         <div class="home-about-block">
           <h3 class="title icon-price">Pick A Price</h3>
@@ -156,6 +180,41 @@
   <script src="js/vendor.js"></script>
 
   <script src="js/main.js"></script>
+  <script>
+    // Show Pick A Price modal when Request A Unicorn is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+      var unicornBlock = document.querySelector('.home-about-block .icon-unicorn').parentElement;
+      if (unicornBlock) {
+        unicornBlock.style.cursor = 'pointer';
+        unicornBlock.addEventListener('click', function() {
+          if (window.$) {
+            $('#pickPriceModal').modal('show');
+          }
+        });
+      }
+      // Update price display
+      var priceRange = document.getElementById('priceRange');
+      var selectedPrice = document.getElementById('selectedPrice');
+      if (priceRange && selectedPrice) {
+        priceRange.addEventListener('input', function() {
+          selectedPrice.textContent = priceRange.value;
+        });
+      }
+      // Handle form submit
+      var pickPriceForm = document.getElementById('pickPriceForm');
+      if (pickPriceForm) {
+        pickPriceForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var price = priceRange.value;
+          alert('You picked a price of $' + price + '!');
+          if (window.$) {
+            $('#pickPriceModal').modal('hide');
+          }
+        });
+      }
+    });
+  </script>
+  <script src="js/rider-details.js"></script>
 </body>
 </html>
 
