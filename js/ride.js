@@ -55,7 +55,21 @@ WildRydes.map = WildRydes.map || {};
 
     // Register click handler for #request button
     $(function onDocReady() {
-        $('#request').click(handleRequestClick);
+        // Do not directly call requestUnicorn on #request click anymore.
+        // The pick-price module will show a confirmation modal and trigger
+        // a 'priceAccepted' event when the user accepts — listen for that.
+        $(document).on('priceAccepted', function(event, price) {
+            // price is available if needed for display/logging
+            var pickupLocation = WildRydes.map.selectedPoint;
+            displayUpdate('Price accepted: $' + price + '. Requesting unicorn...');
+            requestUnicorn(pickupLocation);
+        });
+
+        // Listen for cancellation to update the UI
+        $(document).on('priceCancelled', function(event, price) {
+            displayUpdate('Ride cancelled by user. Price was $' + price + '.');
+        });
+
         $(WildRydes.map).on('pickupChange', handlePickupChanged);
 
         WildRydes.authToken.then(function updateAuthMessage(token) {
@@ -76,6 +90,9 @@ WildRydes.map = WildRydes.map || {};
         requestButton.prop('disabled', false);
     }
 
+    // The request click is intercepted by pick-price.js which triggers
+    // 'priceAccepted' if the user confirms. We keep this function for
+    // reference but it is no longer directly bound to the button.
     function handleRequestClick(event) {
         var pickupLocation = WildRydes.map.selectedPoint;
         event.preventDefault();
