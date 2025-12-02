@@ -112,7 +112,19 @@ var WildRydes = window.WildRydes || {};
         $('#signinForm').submit(handleSignin);
         $('#registrationForm').submit(handleRegister);
         $('#verifyForm').submit(handleVerify);
+        // Sign out button: sign the user out and redirect to register page
+        $('#signOut').on('click', function (e) {
+            e.preventDefault();
+            WildRydes.signOut();
+            window.location.href = 'register.html';
+        });
     });
+
+    function handleSignOut(event) {
+        event.preventDefault();
+        WildRydes.signOut();
+        window.location.href = 'register.html';
+    }
 
     function handleSignin(event) {
         var email = $('#emailInputSignin').val();
