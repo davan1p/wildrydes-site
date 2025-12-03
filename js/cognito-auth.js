@@ -3,7 +3,7 @@
 var WildRydes = window.WildRydes || {};
 
 (function scopeWrapper($) {
-    var signinUrl = '/signin.html';
+    var signinUrl = '/loginin.html';
 
     var poolData = {
         UserPoolId: _config.cognito.userPoolId,
@@ -183,4 +183,5 @@ var WildRydes = window.WildRydes || {};
         );
     }
 }(jQuery));
+
 
