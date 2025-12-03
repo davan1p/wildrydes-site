@@ -39,15 +39,22 @@
         </header>
 
         <section class="form-wrap">
-            <h1>Register</h1>
-            <form id="registrationForm">
-              <input type="email" id="emailInputRegister" placeholder="Email" pattern=".*" required>
-              <input type="password" id="passwordInputRegister" placeholder="Password" pattern=".*" required>
-              <input type="password" id="password2InputRegister" placeholder="Confirm Password" pattern=".*" required>
+    <h1>Register</h1>
 
-              <input type="submit" value="Let's Ryde">
-            </form>
-        </section>
+    <form id="registrationForm">
+        <input type="email" id="emailInputRegister" placeholder="Email" pattern=".*" required>
+        <input type="password" id="passwordInputRegister" placeholder="Password" pattern=".*" required>
+        <input type="password" id="password2InputRegister" placeholder="Confirm Password" pattern=".*" required>
+
+        <input type="submit" value="Let's Ryde">
+    </form>
+
+    <div class="switch-auth">
+        <p>Already have an account? <a href="login.html">Log In</a></p>
+    </div>
+
+</section>
+
 
         <script src="js/vendor/jquery-3.1.0.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
@@ -57,3 +64,4 @@
         <script src="js/cognito-auth.js"></script>
     </body>
 </html>
+
